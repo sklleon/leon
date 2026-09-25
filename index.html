@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Леонид Скляревский — основатель</title>
+  <meta name="description" content="Три направления: автоматизация бизнеса на 1С и ИИ, продвижение экспертов в соцсетях, техника по параллельному импорту.">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Превью ссылки в мессенджерах: её будут пересылать -->
+  <meta property="og:title" content="Леонид Скляревский — основатель">
+  <meta property="og:description" content="1С + ИИ · продвижение экспертов · техника по параллельному импорту">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sklleon.github.io/leon/">
+  <meta property="og:locale" content="ru_RU">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f7fb;
+      --text: #14142b;
+      --muted: #5c5c77;
+      --line: #e8e8f0;
+      --accent: #5b3df5;
+      --accent-2: #7c5cff;
+      --accent-soft: #efebff;
+      --radius: 18px;
+      --shadow: 0 1px 2px rgba(20, 20, 43, .04), 0 4px 16px rgba(20, 20, 43, .06);
+      --shadow-hover: 0 8px 28px rgba(91, 61, 245, .18);
+    }
+
+    /* Тёмная тема идёт от системы: страницу открывают ночью с телефона,
+       и белый лист во весь экран — первое, что закрывают. */
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #101018;
+        --surface: #1a1a26;
+        --text: #f2f2f7;
+        --muted: #a0a0bb;
+        --line: #2a2a3a;
+        --accent: #8b74ff;
+        --accent-2: #a58fff;
+        --accent-soft: #241f45;
+        --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 4px 16px rgba(0, 0, 0, .35);
+        --shadow-hover: 0 8px 28px rgba(139, 116, 255, .22);
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #101018;
+      --surface: #1a1a26;
+      --text: #f2f2f7;
+      --muted: #a0a0bb;
+      --line: #2a2a3a;
+      --accent: #8b74ff;
+      --accent-2: #a58fff;
+      --accent-soft: #241f45;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 4px 16px rgba(0, 0, 0, .35);
+      --shadow-hover: 0 8px 28px rgba(139, 116, 255, .22);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      min-height: 100dvh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -40vh -20vw auto;
+      height: 70vh;
+      background: radial-gradient(ellipse at center, var(--accent-soft) 0%, rgba(255,255,255,0) 65%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .page {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 40px 16px calc(32px + env(safe-area-inset-bottom));
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    /* ---------- ШАПКА ---------- */
+    .header { text-align: center; }
+
+    .avatar {
+      width: 104px;
+      height: 104px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, var(--accent), #b39bff);
+    }
+    .avatar__monogram {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 3px solid var(--bg);
+      background: var(--surface);
+      display: grid;
+      place-items: center;
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: .02em;
+      color: var(--accent);
+    }
+
+    .header h1 {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    .header h1 span { color: var(--muted); font-weight: 600; display: block; font-size: 16px; margin-top: 4px; }
+
+    .header p {
+      margin-top: 12px;
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 38ch;
+      margin-inline: auto;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 14px;
+    }
+    .tags li {
+      list-style: none;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 5px 10px;
+      border-radius: 999px;
+    }
+
+    /* ---------- НАПРАВЛЕНИЯ ---------- */
+    .links { display: flex; flex-direction: column; gap: 12px; }
+
+    .link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 16px 16px 14px;
+      min-height: 76px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      color: inherit;
+      text-decoration: none;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .link__icon {
+      flex: 0 0 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: var(--accent-soft);
+      color: var(--accent);
+      transition: background .18s ease, transform .18s ease;
+    }
+
+    .link__body { flex: 1; min-width: 0; }
+    .link__title { display: block; font-size: 16px; font-weight: 700; line-height: 1.25; }
+    .link__desc {
+      display: block;
+      margin-top: 3px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    .link__arrow {
+      flex: 0 0 auto;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--surface);
+      color: var(--accent);
+      transition: background .18s ease, color .18s ease, transform .18s ease;
+    }
+
+    .link--primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-color: transparent;
+      color: #fff;
+    }
+    .link--primary .link__desc { color: rgba(255,255,255,.85); }
+    .link--primary .link__icon { background: rgba(255,255,255,.18); color: #fff; }
+    .link--primary .link__arrow { background: rgba(255,255,255,.2); color: #fff; }
+
+    @media (hover: hover) {
+      .link:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-hover);
+        border-color: #d6ccff;
+      }
+      .link:hover .link__icon { transform: scale(1.06); }
+      .link:hover .link__arrow { background: var(--accent); color: #fff; transform: translateX(3px); }
+      .link--primary:hover .link__arrow { background: #fff; color: var(--accent); }
+    }
+
+    .link:active { transform: scale(.98); }
+    .link:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+    /* ---------- ПОДВАЛ ---------- */
+    .footer { text-align: center; }
+    .footer small { font-size: 12px; color: var(--muted); }
+
+    @media (min-width: 560px) {
+      .page { padding-top: 64px; gap: 32px; }
+      .avatar { width: 120px; height: 120px; }
+      .avatar__monogram { font-size: 40px; }
+      .header h1 { font-size: 28px; }
+      .link { padding: 18px 20px 18px 16px; }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .header, .link, .footer { animation: rise .5s ease both; }
+      .links .link:nth-child(1) { animation-delay: .06s; }
+      .links .link:nth-child(2) { animation-delay: .12s; }
+      .links .link:nth-child(3) { animation-delay: .18s; }
+      .footer { animation-delay: .26s; }
+      @keyframes rise {
+        from { opacity: 0; transform: translateY(10px); }
+        to   { opacity: 1; transform: none; }
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+
+    <header class="header">
+      <div class="avatar">
+        <div class="avatar__monogram" role="img" aria-label="Леонид Скляревский">ЛС</div>
+      </div>
+
+      <h1>Леонид Скляревский <span>основатель трёх направлений</span></h1>
+      <p>Автоматизирую бизнес на&nbsp;1С и&nbsp;ИИ, продвигаю экспертов в&nbsp;соцсетях, привожу технику по&nbsp;параллельному импорту.</p>
+
+      <ul class="tags" aria-label="Направления">
+        <li>1С + ИИ</li>
+        <li>Продвижение</li>
+        <li>Техника</li>
+      </ul>
+    </header>
+
+    <nav class="links" aria-label="Направления">
+      <a class="link link--primary" id="кнопка-1с" href="https://kvant1c.ru/" target="_blank" rel="noopener">
+        <span class="link__icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 20h8M12 18v2"/><path d="M8 11l2 2-2 2M13 15h3"/></svg>
+        </span>
+        <span class="link__body">
+          <span class="link__title">КВАНТ1С — 1С и ИИ</span>
+          <span class="link__desc">Внедрение, доработка и сопровождение 1С. Сайт с описанием работ</span>
+        </span>
+        <span class="link__arrow" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="link" id="кнопка-smm" href="https://t.me/golos_eksperta_bot?start=hub_direct" target="_blank" rel="noopener">
+        <span class="link__icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9M10 19V5M16 19v-6M20 19H3"/></svg>
+        </span>
+        <span class="link__body">
+          <span class="link__title">Голос эксперта — продвижение</span>
+          <span class="link__desc">Продвижение экспертных аккаунтов. Условия и сроки — в договоре</span>
+        </span>
+        <span class="link__arrow" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="link" id="кнопка-техника" href="https://t.me/parallelhub_store" target="_blank" rel="noopener">
+        <span class="link__icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+        </span>
+        <span class="link__body">
+          <span class="link__title">Parallel Hub — техника</span>
+          <span class="link__desc">Смартфоны, приставки, ноутбуки под заказ. Поступления в Telegram</span>
+        </span>
+        <span class="link__arrow" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </nav>
+
+    <footer class="footer">
+      <small>© <span id="год">2026</span> Леонид Скляревский</small>
+    </footer>
+
+  </main>
+
+  <script>
+    // Метка источника. Страница — посредник между шапкой Instagram и ботом,
+    // и без передачи метки лид из шапки пришёл бы безымянным. Канон меток —
+    // SMM-лиды/scripts/метки.py; форма та же, что принимает Telegram.
+    (function () {
+      var допустимо = /^[A-Za-z0-9_-]{1,64}$/;
+      var метка = 'hub_direct';
+      try {
+        var s = new URLSearchParams(location.search).get('s');
+        if (s && допустимо.test(s)) { метка = s; }
+      } catch (e) { /* старый браузер — остаётся hub_direct, ссылки живые */ }
+
+      var бот = document.getElementById('кнопка-smm');
+      if (бот) { бот.href = 'https://t.me/golos_eksperta_bot?start=' + метка; }
+
+      // У КВАНТ1С стоит Яндекс.Метрика (счётчик 110629617), источник виден
+      // только через utm — deep-link, как у Telegram, сайт не понимает.
+      var сайт = document.getElementById('кнопка-1с');
+      if (сайт) {
+        сайт.href = 'https://kvant1c.ru/?utm_source=hub&utm_medium=bio&utm_campaign=' + метка;
+      }
+
+      document.getElementById('год').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
