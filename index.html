@@ -448,23 +448,20 @@
   </script>
 
   <script>
-    // Счётчик-АНТУРАЖ «запусков» бота. Показ = сохранённая база + текущая минута
-    // часа (пример: база 11, клик в 08:29 → 11+29 = 40). База растёт на 1 с
-    // каждым кликом «Попробовать» и живёт в localStorage этого браузера, так что
-    // со временем число ползёт вверх, а минута оживляет его между заходами.
-    // ⚠️ Это ВИТРИННОЕ украшение, а не реальная статистика: настоящие переходы
-    // Коля считает по меткам ?start= в /stats. Число здесь декоративное.
+    // Общий счётчик «запусков» — ОДНО число на всех устройствах. Раньше оно жило
+    // в localStorage и на каждом телефоне было своё (владелец видел разные цифры).
+    // Теперь источник один: общий счётчик Abacus (бесплатный, без регистрации,
+    // CORS *), +1 на каждый клик «Попробовать» откуда угодно. Показ = СЕИД
+    // (одинаковая заготовка) + общий счёт + текущая минута часа (антураж по
+    // просьбе владельца). СЕИД, общий счёт и минута одинаковы у всех — значит в
+    // один момент число совпадает на любом телефоне и копится от реальных кликов.
+    // ⚠️ Витринное оживление, не статистика: настоящие переходы Коля считает по
+    // меткам ?start= в /stats.
     (function () {
-      var СЕИД = { kolya: 11, klim: 7, petr: 9, taras: 5, gleb: 4 }; // старт базы
-      function ключ(bot) { return "leonhub_hits_" + bot; }
-      function база(bot) {
-        try {
-          var v = localStorage.getItem(ключ(bot));
-          if (v !== null) { var n = parseInt(v, 10); if (!isNaN(n)) return n; }
-        } catch (e) {}
-        return СЕИД[bot] || 0;
-      }
-      function слово(n) {                       // запуск / запуска / запусков
+      var NS = "leonhub-sklleon";                    // пространство имён счётчика
+      var ХОСТ = "https://abacus.jasoncameron.dev";  // общий счётчик (fly.io)
+      var СЕИД = { kolya: 11, klim: 7, petr: 9, taras: 5, gleb: 4 }; // заготовка
+      function слово(n) {                            // запуск / запуска / запусков
         var d = n % 100;
         if (d >= 11 && d <= 14) return "запусков";
         switch (n % 10) {
@@ -473,20 +470,39 @@
           default: return "запусков";
         }
       }
-      function показать(el, bot) {
-        var n = база(bot) + new Date().getMinutes();
+      function кэш_чит(bot) {
+        try { var s = localStorage.getItem("leonhub_shared_" + bot);
+          return s === null ? 0 : (parseInt(s, 10) || 0); } catch (e) { return 0; }
+      }
+      function кэш_пиш(bot, v) {
+        try { localStorage.setItem("leonhub_shared_" + bot, String(v)); } catch (e) {}
+      }
+      function показать(bot, общий) {
+        var el = document.querySelector('.counter[data-bot="' + bot + '"]');
+        if (!el) return;
+        var n = (СЕИД[bot] || 0) + общий + new Date().getMinutes();
         el.textContent = "↗ " + n + " " + слово(n);
         el.hidden = false;
       }
+      function запрос(путь) {
+        return fetch(ХОСТ + путь).then(function (r) { return r.ok ? r.json() : null; });
+      }
+      // Первый показ — мгновенно из кэша, затем уточняем общим числом с сервера.
       document.querySelectorAll(".counter[data-bot]").forEach(function (el) {
-        показать(el, el.dataset.bot);
+        var bot = el.dataset.bot;
+        показать(bot, кэш_чит(bot));
+        запрос("/get/" + NS + "/" + bot).then(function (d) {
+          if (d && typeof d.value === "number") { кэш_пиш(bot, d.value); показать(bot, d.value); }
+        }).catch(function () {});
       });
+      // Клик «Попробовать» — инкремент общего счётчика (ссылка открывается в новой
+      // вкладке, страница остаётся, ответ успевает обновить бейдж).
       document.querySelectorAll(".botcard__btn[data-bot]").forEach(function (btn) {
         btn.addEventListener("click", function () {
           var bot = btn.dataset.bot;
-          var el = document.querySelector('.counter[data-bot="' + bot + '"]');
-          if (el) показать(el, bot);            // сперва показываем база+минута
-          try { localStorage.setItem(ключ(bot), String(база(bot) + 1)); } catch (e) {}
+          запрос("/hit/" + NS + "/" + bot).then(function (d) {
+            if (d && typeof d.value === "number") { кэш_пиш(bot, d.value); показать(bot, d.value); }
+          }).catch(function () {});
         });
       });
     })();
