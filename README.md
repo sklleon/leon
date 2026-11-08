@@ -13,7 +13,7 @@
 
 Страница принимает `?s=<метка>` и передаёт её дальше: в Telegram через
 `?start=`, на kvant1c.ru через `utm_campaign`. Без параметра — `hub_direct`.
-Канон меток — `/Users/mrleo/Projects/SMM-лиды/scripts/метки.py`, префикс `hub_`
+Канон меток — `/Users/mrleo/Projects/smm-lidy/scripts/метки.py`, префикс `hub_`
 заведён там же 25.09.2026.
 
 Адрес для шапки Instagram: `https://sklleon.github.io/leon/?s=ig_bio`
