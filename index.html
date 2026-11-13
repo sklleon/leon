@@ -152,6 +152,15 @@
       border-radius: 999px;
     }
 
+    /* Блок «О себе» и компактные ссылки-направления вместо крупных карточек (13.11.2026). */
+    .about { margin: 16px auto 0; max-width: 34em; font-size: 14.5px; line-height: 1.55;
+      color: var(--muted); }
+    .about b { color: var(--text); }
+    .dirs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 14px; }
+    .dirs a { font-size: 13px; font-weight: 700; color: var(--accent); background: var(--accent-soft);
+      padding: 7px 13px; border-radius: 999px; text-decoration: none; white-space: nowrap; }
+    .dirs a:hover { background: var(--accent); color: #fff; }
+
     /* ---------- НАПРАВЛЕНИЯ ---------- */
     .links { display: flex; flex-direction: column; gap: 12px; }
 
@@ -335,53 +344,15 @@
       <h1>Леонид Скляревский <span>основатель трёх направлений</span></h1>
       <p>Автоматизирую бизнес на&nbsp;1С и&nbsp;ИИ, продвигаю экспертов в&nbsp;соцсетях, привожу технику по&nbsp;параллельному импорту.</p>
 
-      <ul class="tags" aria-label="Направления">
-        <li>1С + ИИ</li>
-        <li>Продвижение</li>
-        <li>Техника</li>
-      </ul>
+      <p class="about">
+        <b>25+ лет в ИТ и автоматизации бизнеса.</b> Путь от инженера до архитектора решений в крупных промышленных и розничных компаниях. Сейчас соединяю 1С, ИИ и Telegram и довожу идею до работающего в проде продукта: мини-приложения, боты, автоматизация процессов, продвижение экспертов.
+      </p>
+      <div class="dirs" aria-label="Направления">
+        <a id="кнопка-1с" href="https://kvant1c.ru/" target="_blank" rel="noopener">1С и&nbsp;ИИ ↗</a>
+        <a id="кнопка-smm" href="https://t.me/golos_eksperta_bot?start=hub_direct" target="_blank" rel="noopener">Продвижение ↗</a>
+        <a id="кнопка-техника" href="https://t.me/parallelhub_store" target="_blank" rel="noopener">Техника ↗</a>
+      </div>
     </header>
-
-    <nav class="links" aria-label="Направления">
-      <a class="link link--primary" id="кнопка-1с" href="https://kvant1c.ru/" target="_blank" rel="noopener">
-        <span class="link__icon" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 20h8M12 18v2"/><path d="M8 11l2 2-2 2M13 15h3"/></svg>
-        </span>
-        <span class="link__body">
-          <span class="link__title">КВАНТ1С — 1С и ИИ</span>
-          <span class="link__desc">Внедрение, доработка и сопровождение 1С. Сайт с описанием работ</span>
-        </span>
-        <span class="link__arrow" aria-hidden="true">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </span>
-      </a>
-
-      <a class="link" id="кнопка-smm" href="https://t.me/golos_eksperta_bot?start=hub_direct" target="_blank" rel="noopener">
-        <span class="link__icon" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9M10 19V5M16 19v-6M20 19H3"/></svg>
-        </span>
-        <span class="link__body">
-          <span class="link__title">Голос эксперта — продвижение</span>
-          <span class="link__desc">Продвижение экспертных аккаунтов. Условия и сроки — в договоре</span>
-        </span>
-        <span class="link__arrow" aria-hidden="true">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </span>
-      </a>
-
-      <a class="link" id="кнопка-техника" href="https://t.me/parallelhub_store" target="_blank" rel="noopener">
-        <span class="link__icon" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
-        </span>
-        <span class="link__body">
-          <span class="link__title">Parallel Hub — техника</span>
-          <span class="link__desc">Смартфоны, приставки, ноутбуки под заказ. Поступления в Telegram</span>
-        </span>
-        <span class="link__arrow" aria-hidden="true">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </span>
-      </a>
-    </nav>
 
     <section class="group" aria-labelledby="apps-заголовок">
       <p class="group__label" id="apps-заголовок">Telegram мини-приложения — <span>открой и пользуйся</span></p>
